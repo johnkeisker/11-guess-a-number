@@ -23,9 +23,9 @@ import readlineSync from 'readline-sync';
  */
 
 export function generateNumber() {
-  // YOUR CODE HERE
-  // BE SURE IT'S AN INTEGER OR YOU WILL BE SAD
+  return Math.floor(Math.random() * 100) + 1;
 }
+
 
 /**
  * We need a way to repeatedly ask for user input.
@@ -41,7 +41,7 @@ export function generateNumber() {
  */
 
 export function getUserGuess() {
-	// YOUR CODE HERE
+	return readlineSync.question("Pick a number between 1 && 100. :");
 }
 
 /**
@@ -55,7 +55,18 @@ export function getUserGuess() {
  */
 
 export function isRightNumber(correctNumber, userGuess) {
-  // YOUR CODE HERE
+  if ( correctNumber === userGuess ) {
+    return true;
+  }
+
+  if (correctNumber > userGuess) {
+    console.log("You are too low!");
+  }
+  else {
+    console.log("You are too high!");
+  }
+  return false;
+
 }
 
 /**
@@ -86,11 +97,23 @@ export function isRightNumber(correctNumber, userGuess) {
  */
 
 function runGame() {
-	// DISPLAY WELCOME BANNER
 
-	// STORE INITIAL GAME STATE
+	console.log("Welcome to the GUESSING GAME! The computer will pick a random number between 1 and 100. If you guess too high, the computer will tell you you're too high and ask you to guess again. If you guess too low, the computer will tell you you're too low and ask you to guess again. If you guess correctly, the computer will congratulate you for winning! GOOD LUCK!");
 
-	// WHILE LOOP FOR WHEN GAME IS NOT WON
+
+	var correctNumber = generateNumber();
+  var wonGame = false;
+
+	while (!wonGame) {
+
+    var guess = Number(getUserGuess());
+    var winner = isRightNumber(correctNumber, guess);
+    if (winner) {
+      wonGame = true;
+    }
+
+  }
+  console.log("WAY TO GO!!!! YOU ARE A WINNER!!!");
 }
 
 /**
